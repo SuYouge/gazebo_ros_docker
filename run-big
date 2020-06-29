@@ -15,7 +15,7 @@ IMAGE_NAME = "gazebo_ros_docker"
 def run_dev_environment(command, ws_mount, ros1="melodic", ros2=""):
     user = ut.get_user()
     docker_args = []
-    dockerfile  = '{}'.format('ros1' if ros2 == '' else 'ros2')
+    dockerfile  = '{}'.format('ros-dev:0.1' if ros2 == '' else 'ros2')
 
     temp_volume = "/home/{}/.{}".format(user, IMAGE_NAME)
 
@@ -28,20 +28,27 @@ def run_dev_environment(command, ws_mount, ros1="melodic", ros2=""):
     docker_args.append("--volume=\"/tmp/.X11-unix:/tmp/.X11-unix:rw\"")
     docker_args.append("--volume=\"$HOME/.Xauthority:/root/.Xauthority:rw\"")
     docker_args.append("--name=\"{}\"".format(IMAGE_NAME))
+    print("--name=\"{}\"".format(IMAGE_NAME))
     docker_args.append("--privileged")
     docker_args.append("--network=\"host\"")
     # docker_args.append("-p 12333:12333")
     docker_args.append("--user {0}:{0}".format(ut.get_uid()))
+    print("--user {0}:{0}".format(ut.get_uid()))
     # Keep user settings
     docker_args.append("--volume {}/user/:/home/{}/".format(temp_volume, user))
+    print("--volume {}/user/:/home/{}/".format(temp_volume, user))
     # Mount workspace
     docker_args.append("--volume {}:/{}".format(ws_mount, ws_name))
+    print("--volume {}:/{}".format(ws_mount, ws_name))
     docker_args.append("--volume {}/ws/build/:/{}/build/".format(temp_volume, ws_name))
+    print("--volume {}/ws/build/:/{}/build/".format(temp_volume, ws_name))
     docker_args.append("--volume {}/ws/devel/:/{}/devel/".format(temp_volume, ws_name))
+    print("--volume {}/ws/devel/:/{}/devel/".format(temp_volume, ws_name))
 
     docker_args.append("-e ROS_HOSTNAME=localhost")
     docker_args.append("-e ROS_MASTER_URI=http://localhost:11311")
     docker_args.append("--workdir /{}/".format(ws_name))
+    print("--workdir /{}/".format(ws_name))
 
     if ut.is_nvidia():
         docker_args.append("--runtime=\"nvidia\"")

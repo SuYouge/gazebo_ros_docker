@@ -1,0 +1,9 @@
+{
+    "python.pythonPath": "/usr/bin/python",
+    "cmake.configureOnOpen": false,
+    "ros.distro": "melodic",
+    "python.autoComplete.extraPaths": [
+        "/catkin_ws/devel/lib/python2.7/dist-packages",
+        "/opt/ros/melodic/lib/python2.7/dist-packages"
+    ]
+}

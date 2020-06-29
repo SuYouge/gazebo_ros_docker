@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 LABEL maintainer="Emiliano Borghi"
 
 ARG uid
-ENV USER docker_ros
+ENV USER yogurtsuee
 
 # Setup environment
 RUN apt-get update && apt-get install -y locales

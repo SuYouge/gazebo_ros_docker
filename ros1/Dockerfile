@@ -6,7 +6,7 @@ ARG ros1
 ENV ROS1_DISTRO ${ros1}
 ARG gz
 ENV GZ_VERSION ${gz}
-ENV USER docker_ros
+ENV USER yogurtsuee
 
 USER root
 
@@ -58,15 +58,15 @@ RUN apt-get update && \
 # Install dependencies
 # https://unix.stackexchange.com/a/391112
 COPY packages.txt packages.txt
-RUN apt-get update && \
-    xargs -a packages.txt apt-get install -y
+# RUN apt-get update && \
+#  xargs -a packages.txt apt-get install -y
 
 # ==================
 
-RUN rosdep init
+# RUN rosdep init
 USER $USER
 RUN echo ". /opt/ros/${ROS1_DISTRO}/setup.bash" >> /home/${USER}/.bashrc
-RUN rosdep update
+# RUN rosdep update
 USER root
 
 # Workspace

@@ -39,7 +39,6 @@ ros-*-rgbd-launch
 ros-*-robot-calibration
 ros-*-robot-controllers
 ros-*-robot-localization
-ros-*-ros-control
 ros-*-ros-controllers
 ros-*-rosparam-shortcuts
 ros-*-rosserial-python
@@ -52,3 +51,4 @@ ros-*-tf2-geometry-msgs
 ros-*-twist-mux
 ros-*-urdf-geometry-parser
 ros-*-voxel-grid
+
